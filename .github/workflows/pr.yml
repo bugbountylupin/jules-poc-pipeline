@@ -20,7 +20,5 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           always-auth: true
 
-      - name: npm install (with auth)
+      - name: npm install
         run: npm install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
