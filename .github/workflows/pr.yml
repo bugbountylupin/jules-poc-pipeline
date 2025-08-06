@@ -1,0 +1,26 @@
+# .github/workflows/pr-npm-install.yml
+name: PR npm install
+
+on:
+  pull_request:
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'              # or use node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
+          always-auth: true
+
+      - name: npm install (with auth)
+        run: npm install
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
